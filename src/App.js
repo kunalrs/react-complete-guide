@@ -16,10 +16,10 @@ const App = props => {
 
   console.log(personsState, otherState);
 
-  const switchStateHandler = () => {
+  const switchStateHandler = (newName) => {
     setPersonsState({
       persons :[
-        { name: "Kunal Sagar", age: "31" },
+        { name: newName, age: "31" },
         { name: "Karan R Sagar", age: "29" },
         { name: "Heer K Sagar", age:"2" }
       ]
@@ -28,10 +28,19 @@ const App = props => {
 
   return (
     <div className="App">
-        <button onClick={switchStateHandler}>Switch Names</button>
-        <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-        <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
-        <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
+        {/*Below is not recommended*/}
+        <button onClick={() => switchStateHandler('Krs')} >Switch Names</button>
+        <Person
+          // below is recommended!!!
+          onClick={switchStateHandler.bind(this, 'Kunal Sagar...')}
+          name={personsState.persons[0].name} 
+          age={personsState.persons[0].age} />
+        <Person 
+          name={personsState.persons[1].name} 
+          age={personsState.persons[1].age} />
+        <Person 
+          name={personsState.persons[2].name} 
+          age={personsState.persons[2].age} />
     </div>
   );
 }

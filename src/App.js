@@ -16,7 +16,7 @@ const App = props => {
 
   const [otherState, setOtherState] = useState("this is some value");
 
-  console.log(personsState, otherState);
+  console.log(personsState, otherState, showState);
 
   const switchStateHandler = (newName) => {
     setPersonsState({
@@ -49,26 +49,34 @@ const App = props => {
     padding: '8px'
   };
 
+  var persons = null;
+
+  if(showState) {
+    persons = (
+      <div>
+        <Person
+          // below is recommended!!!
+          onClick={switchStateHandler.bind(this, 'Kunal Sagar...')}
+          name={personsState.persons[0].name} 
+          age={personsState.persons[0].age} />
+        <Person 
+          changed={nameChangeHandler}
+          name={personsState.persons[1].name} 
+          age={personsState.persons[1].age} />
+        <Person 
+          name={personsState.persons[2].name} 
+          age={personsState.persons[2].age} />
+      </div>
+    );
+  } else {
+    persons = null;
+  }
+
   return (
     <div className="App">
         {/*Below is not recommended*/}
         <button style={style} onClick={togglePersons} >Toggle Persons</button>
-        { showState?
-            <div>
-              <Person
-                // below is recommended!!!
-                onClick={switchStateHandler.bind(this, 'Kunal Sagar...')}
-                name={personsState.persons[0].name} 
-                age={personsState.persons[0].age} />
-              <Person 
-                changed={nameChangeHandler}
-                name={personsState.persons[1].name} 
-                age={personsState.persons[1].age} />
-              <Person 
-                name={personsState.persons[2].name} 
-                age={personsState.persons[2].age} />
-            </div> : null
-          }
+        {persons}
     </div>
   );
 }

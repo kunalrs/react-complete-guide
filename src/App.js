@@ -9,11 +9,12 @@ const App = props => {
       { name: "Kunal", age: "31" },
       { name: "Karan", age: "29" },
       { name: "Heer", age:"2" }
-    ],
-    otherState: "Some value"
+    ]
   });
 
-  console.log(personsState);
+  const [otherState, setOtherState] = useState("this is some value");
+
+  console.log(personsState, otherState);
 
   const switchStateHandler = () => {
     setPersonsState({
@@ -21,11 +22,7 @@ const App = props => {
         { name: "Kunal Sagar", age: "31" },
         { name: "Karan R Sagar", age: "29" },
         { name: "Heer K Sagar", age:"2" }
-      ],
-      // if you dont do this, the otherState will not be passed 
-      // onto unlike class based state. 
-      // Best practice is to use useState multiple times. 
-      otherState: personsState.otherState
+      ]
     })
   };
 

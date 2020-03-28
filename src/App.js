@@ -36,10 +36,17 @@ const App = props => {
     });
   }
 
+  const style = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px'
+  };
+
   return (
     <div className="App">
         {/*Below is not recommended*/}
-        <button onClick={() => switchStateHandler('Krs')} >Switch Names</button>
+        <button style={style} onClick={() => switchStateHandler('Krs')} >Switch Names</button>
         <Person
           // below is recommended!!!
           onClick={switchStateHandler.bind(this, 'Kunal Sagar...')}

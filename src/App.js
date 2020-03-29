@@ -40,8 +40,9 @@ const App = props => {
 
   const deletePersonHandler = (index) => {
     console.log("Deleted ", index);
-    const newPersons = personsState.persons;
-    newPersons.splice(index, 1);
+    // const newPersons = personsState.persons.slice(); //Creates a new copy of array
+    const newPersons = [...personsState.persons]; // Same as above modern approach.
+    newPersons.splice(index, 1); // remove element from new array 
     setPersonsState({
       persons: newPersons
     })

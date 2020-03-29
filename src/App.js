@@ -38,6 +38,15 @@ const App = props => {
     });
   }
 
+  const deletePersonHandler = (index) => {
+    console.log("Deleted ", index);
+    const newPersons = personsState.persons;
+    newPersons.splice(index, 1);
+    setPersonsState({
+      persons: newPersons
+    })
+  }
+
   const togglePersons = () => {
     setShowState(!showState);
   }
@@ -53,20 +62,14 @@ const App = props => {
 
   if(showState) {
     persons = (
-      <div>
-        <Person
-          // below is recommended!!!
-          onClick={switchStateHandler.bind(this, 'Kunal Sagar...')}
-          name={personsState.persons[0].name} 
-          age={personsState.persons[0].age} />
-        <Person 
-          changed={nameChangeHandler}
-          name={personsState.persons[1].name} 
-          age={personsState.persons[1].age} />
-        <Person 
-          name={personsState.persons[2].name} 
-          age={personsState.persons[2].age} />
-      </div>
+      <div>{ 
+        personsState.persons.map( (person, index) => {
+          return <Person 
+                    onClick={deletePersonHandler.bind(this, index)}
+                    name={person.name} 
+                    age={person.age} />
+        })
+      }</div>
     );
   } else {
     persons = null;

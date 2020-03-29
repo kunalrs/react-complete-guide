@@ -3,10 +3,10 @@ import './Person.css';
 
 const person = (props) => {
     return (
-        <div className="Person" onClick={props.onClick} >
-            <p>I am {props.name} & I am {props.age} years old</p>
+        <div className="Person">
+            <p onClick={props.onClick} >I am {props.name} & I am {props.age} years old</p>
             <p>{props.children}</p>
-            <input type="text" onChange={props.changed} value={props.name} />
+            <input type="text" onChange={(event) => props.changed(event)} value={props.name} />
         </div>
     );
 };

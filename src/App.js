@@ -8,15 +8,15 @@ const App = props => {
 
   const [personsState, setPersonsState] = useState({
     persons: [
-      { name: "Kunal", age: "31" },
-      { name: "Karan", age: "29" },
-      { name: "Heer", age:"2" }
+      { id: 'kunal1', name: "Kunal", age: "31" },
+      { id: 'karan1', name: "Karan", age: "29" },
+      { id: 'heer1', name: "Heer", age:"2" }
     ]
   });
 
   const [otherState, setOtherState] = useState("this is some value");
 
-  console.log(personsState, otherState, showState);
+  //console.log(personsState, otherState, showState);
 
   const switchStateHandler = (newName) => {
     setPersonsState({
@@ -28,18 +28,21 @@ const App = props => {
     });
   };
 
-  const nameChangeHandler = (event) => {
+  const nameChangeHandler = (event, id) => {
+    //console.log(event, id);
+    const personIndex = personsState.persons.findIndex(p => p.id === id);
+    const person = { ...personsState.persons[personIndex] };
+    person.name = event.target.value;
+    const persons = [ ...personsState.persons ];
+    persons[personIndex] = person;
+
     setPersonsState({
-      persons:[
-        { name: "Kunal", age: "31" },
-        { name: event.target.value, age: "29" },
-        { name: "Heer K Sagar", age:"2" }
-      ]
+      persons: persons
     });
   }
 
   const deletePersonHandler = (index) => {
-    console.log("Deleted ", index);
+    //console.log("Deleted ", index);
     // const newPersons = personsState.persons.slice(); //Creates a new copy of array
     const newPersons = [...personsState.persons]; // Same as above modern approach.
     newPersons.splice(index, 1); // remove element from new array 
@@ -63,11 +66,13 @@ const App = props => {
 
   if(showState) {
     persons = (
-      <div>{ 
+      <div>{
         personsState.persons.map( (person, index) => {
           return <Person 
-                    onClick={deletePersonHandler.bind(this, index)}
-                    name={person.name} 
+                    onClick={ () => deletePersonHandler(index) }
+                    changed = { (event) => nameChangeHandler(event, person.id)}
+                    key={person.id}
+                    name={person.name}
                     age={person.age} />
         })
       }</div>

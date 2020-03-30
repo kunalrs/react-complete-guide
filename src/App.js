@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 const App = (props) => {
 
@@ -61,7 +62,11 @@ const App = (props) => {
     font: 'inherit',
     border: '1px solid blue',
     padding: '8px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    ':hover': {
+      backgroundColor: 'lightgreen',
+      color: 'black'
+    }
   };
 
   var persons = null;
@@ -78,6 +83,11 @@ const App = (props) => {
 
     // If persons are visible change background color of button to red.  
     style.backgroundColor = 'red'
+    
+    style[':hover'] = {
+      backgroundColor: 'salmon',
+      color: 'black'
+    }
 
     persons = (
       <div>{
@@ -105,4 +115,4 @@ const App = (props) => {
   );
 }
 
-export default App;
+export default Radium(App);

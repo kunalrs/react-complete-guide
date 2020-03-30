@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const App = props => {
+const App = (props) => {
 
   const [showState, setShowState] = useState(false);
 
@@ -56,15 +56,29 @@ const App = props => {
   }
 
   const style = {
-    backgroundColor: 'white',
+    backgroundColor: 'green',
+    color: 'white',
     font: 'inherit',
     border: '1px solid blue',
-    padding: '8px'
+    padding: '8px',
+    cursor: 'pointer'
   };
 
   var persons = null;
+  let classes = [];
+
+  if(personsState.persons.length <= 2) {
+    classes.push('red');
+  }
+  if (personsState.persons.length <= 1) {
+    classes.push('bold');
+  }
 
   if(showState) {
+
+    // If persons are visible change background color of button to red.  
+    style.backgroundColor = 'red'
+
     persons = (
       <div>{
         personsState.persons.map( (person, index) => {
@@ -84,6 +98,7 @@ const App = props => {
   return (
     <div className="App">
         {/*Below is not recommended*/}
+        <p className={classes.join(' ')}>Its working...</p>
         <button style={style} onClick={togglePersons} >Toggle Persons</button>
         {persons}
     </div>

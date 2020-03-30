@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 
 const App = (props) => {
 
@@ -106,12 +106,14 @@ const App = (props) => {
   }
 
   return (
-    <div className="App">
+    <StyleRoot>
+      <div className="App">
         {/*Below is not recommended*/}
         <p className={classes.join(' ')}>Its working...</p>
         <button style={style} onClick={togglePersons} >Toggle Persons</button>
         {persons}
-    </div>
+      </div>
+    </StyleRoot>
   );
 }
 

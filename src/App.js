@@ -15,20 +15,6 @@ const App = (props) => {
     ]
   });
 
-  const [otherState, setOtherState] = useState("this is some value");
-
-  //console.log(personsState, otherState, showState);
-
-  const switchStateHandler = (newName) => {
-    setPersonsState({
-      persons :[
-        { name: newName, age: "31" },
-        { name: "Karan R Sagar", age: "29" },
-        { name: "Heer K Sagar", age:"2" }
-      ]
-    });
-  };
-
   const nameChangeHandler = (event, id) => {
     //console.log(event, id);
     const personIndex = personsState.persons.findIndex(p => p.id === id);
@@ -57,14 +43,14 @@ const App = (props) => {
   }
 
   const StyledButton = styled.button`
-    background-color: green;
+    background-color: ${props => { return props.showState? 'red':'green'}};
     color: white;
     font: inherit;
     border: 1px solid blue;
     padding: 8px;
     cursor: pointer;
     &:hover {
-      background-color: lightgreen;
+      background-color: ${props => { return props.showState? 'salmon':'lightgreen' }};
       color: black
     }
   `;
@@ -101,7 +87,7 @@ const App = (props) => {
       <div className="App">
         {/*Below is not recommended*/}
         <p className={classes.join(' ')}>Its working...</p>
-        <StyledButton onClick={togglePersons} >Toggle Persons</StyledButton>
+        <StyledButton showState={showState} onClick={togglePersons} >Toggle Persons</StyledButton>
         {persons}
       </div>
   );

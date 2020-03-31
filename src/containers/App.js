@@ -1,67 +1,73 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-const App = (props) => {
+class App extends Component {
 
-  const [showState, setShowState] = useState(false);
-
-  const [personsState, setPersonsState] = useState({
+  state = {
+    showPersons: false,
     persons: [
       { id: 'kunal1', name: "Kunal", age: "31" },
       { id: 'karan1', name: "Karan", age: "29" },
       { id: 'heer1', name: "Heer", age:"2" }
     ]
-  });
+  };
 
-  const nameChangeHandler = (event, id) => {
+  nameChangeHandler = (event, id) => {
     //console.log(event, id);
-    const personIndex = personsState.persons.findIndex(p => p.id === id);
-    const person = { ...personsState.persons[personIndex] };
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
+    const person = { ...this.state.persons[personIndex] };
     person.name = event.target.value;
-    const persons = [ ...personsState.persons ];
+    const persons = [ ...this.state.persons ];
     persons[personIndex] = person;
-
-    setPersonsState({
+    this.setState({
       persons: persons
     });
   }
 
-  const deletePersonHandler = (index) => {
+  deletePersonHandler = (index) => {
     //console.log("Deleted ", index);
     // const newPersons = personsState.persons.slice(); //Creates a new copy of array
-    const newPersons = [...personsState.persons]; // Same as above modern approach.
+    const newPersons = [...this.state.persons]; // Same as above modern approach.
     newPersons.splice(index, 1); // remove element from new array 
-    setPersonsState({
+    this.setState({
       persons: newPersons
-    })
+    });
   }
 
-  const togglePersonsHandler = () => {
-    setShowState(!showState);
+  togglePersonsHandler = () => {
+    this.setState({
+      showPersons: true
+    });
   }
 
-  var persons = null;
-  let btnClass = '';
+  render() {
+    let persons = null;
 
-  if(showState) {
-    persons = (
-      <Persons 
-        persons={personsState.persons} 
-        clicked={deletePersonHandler} 
-        changed={nameChangeHandler} />
+    if(this.state.showPersons) {
+      persons = (
+        <Persons 
+          persons={this.state.persons} 
+          clicked={this.deletePersonHandler} 
+          changed={this.nameChangeHandler} />
+      );
+    } else {
+      persons = null;
+    }
+
+    return (
+        <div className={classes.App}>
+          <Cockpit 
+            title={this.props.appTitle} 
+            toggle={this.togglePersonsHandler} 
+            persons={this.state.persons} 
+            showPersons={this.state.showPersons} />
+
+          {persons}
+        </div>
     );
-  } else {
-    persons = null;
   }
-
-  return (
-      <div className={classes.App}>
-        <Cockpit toggle={togglePersonsHandler} persons={personsState.persons} showState={showState} />
-        {persons}
-      </div>
-  );
 }
 
 export default App;

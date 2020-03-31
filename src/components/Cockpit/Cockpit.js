@@ -19,10 +19,10 @@ const Cockpit = (props) => {
 
     return (
         <div className={classes.Cockpit}>
+            <h1>{props.title}</h1>
             <p className={textClasses.join(' ')}>Its working...</p>
             <button 
                 className={btnClass} 
-                showState={props.showState} 
                 onClick={() => props.toggle()} >Toggle Persons
             </button>
         </div>

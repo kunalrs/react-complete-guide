@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Person from './Person/Person';
-import styled from 'styled-components';
 
 const App = (props) => {
 
@@ -42,31 +41,20 @@ const App = (props) => {
     setShowState(!showState);
   }
 
-  const StyledButton = styled.button`
-    background-color: ${props => { return props.showState? 'red':'green'}};
-    color: white;
-    font: inherit;
-    border: 1px solid blue;
-    padding: 8px;
-    cursor: pointer;
-    &:hover {
-      background-color: ${props => { return props.showState? 'salmon':'lightgreen' }};
-      color: black
-    }
-  `;
-  
-
   var persons = null;
-  let classes = [];
+  let textClasses = [];
 
   if(personsState.persons.length <= 2) {
-    classes.push('red');
+    textClasses.push(classes.red);
   }
   if (personsState.persons.length <= 1) {
-    classes.push('bold');
+    textClasses.push(classes.bold);
   }
 
+  let btnClass = '';
+
   if(showState) {
+    btnClass = classes.Red;
     persons = (
       <div>{
         personsState.persons.map( (person, index) => {
@@ -84,10 +72,10 @@ const App = (props) => {
   }
 
   return (
-      <div className="App">
+      <div className={classes.App}>
         {/*Below is not recommended*/}
-        <p className={classes.join(' ')}>Its working...</p>
-        <StyledButton showState={showState} onClick={togglePersons} >Toggle Persons</StyledButton>
+        <p className={textClasses.join(' ')}>Its working...</p>
+        <button className={btnClass} showState={showState} onClick={togglePersons} >Toggle Persons</button>
         {persons}
       </div>
   );

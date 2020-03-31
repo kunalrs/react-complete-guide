@@ -59,10 +59,10 @@ const App = (props) => {
     persons = (
       <div>{
         personsState.persons.map( (person, index) => {
-          return <ErrorBoundary><Person 
+          return <ErrorBoundary key={person.id}><Person 
                     onClick={ () => deletePersonHandler(index) }
                     changed = { (event) => nameChangeHandler(event, person.id)}
-                    key={person.id}
+                    
                     name={person.name}
                     age={person.age} /></ErrorBoundary>
         })

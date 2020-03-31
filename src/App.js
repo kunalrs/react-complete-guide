@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styled from 'styled-components';
 
 const App = (props) => {
 
@@ -55,18 +56,19 @@ const App = (props) => {
     setShowState(!showState);
   }
 
-  const style = {
-    backgroundColor: 'green',
-    color: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer',
-    ':hover': {
-      backgroundColor: 'lightgreen',
-      color: 'black'
+  const StyledButton = styled.button`
+    background-color: green;
+    color: white;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgreen;
+      color: black
     }
-  };
+  `;
+  
 
   var persons = null;
   let classes = [];
@@ -79,15 +81,6 @@ const App = (props) => {
   }
 
   if(showState) {
-
-    // If persons are visible change background color of button to red.  
-    style.backgroundColor = 'red'
-    
-    style[':hover'] = {
-      backgroundColor: 'salmon',
-      color: 'black'
-    }
-
     persons = (
       <div>{
         personsState.persons.map( (person, index) => {
@@ -108,7 +101,7 @@ const App = (props) => {
       <div className="App">
         {/*Below is not recommended*/}
         <p className={classes.join(' ')}>Its working...</p>
-        <button style={style} onClick={togglePersons} >Toggle Persons</button>
+        <StyledButton onClick={togglePersons} >Toggle Persons</StyledButton>
         {persons}
       </div>
   );

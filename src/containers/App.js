@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './App.module.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 const App = (props) => {
 
@@ -38,35 +38,19 @@ const App = (props) => {
     })
   }
 
-  const togglePersons = () => {
+  const togglePersonsHandler = () => {
     setShowState(!showState);
   }
 
   var persons = null;
-  let textClasses = [];
-
-  if(personsState.persons.length <= 2) {
-    textClasses.push(classes.red);
-  }
-  if (personsState.persons.length <= 1) {
-    textClasses.push(classes.bold);
-  }
-
   let btnClass = '';
 
   if(showState) {
-    btnClass = classes.Red;
     persons = (
-      <div>{
-        personsState.persons.map( (person, index) => {
-          return <ErrorBoundary key={person.id}><Person 
-                    onClick={ () => deletePersonHandler(index) }
-                    changed = { (event) => nameChangeHandler(event, person.id)}
-                    
-                    name={person.name}
-                    age={person.age} /></ErrorBoundary>
-        })
-      }</div>
+      <Persons 
+        persons={personsState.persons} 
+        clicked={deletePersonHandler} 
+        changed={nameChangeHandler} />
     );
   } else {
     persons = null;
@@ -74,9 +58,7 @@ const App = (props) => {
 
   return (
       <div className={classes.App}>
-        {/*Below is not recommended*/}
-        <p className={textClasses.join(' ')}>Its working...</p>
-        <button className={btnClass} showState={showState} onClick={togglePersons} >Toggle Persons</button>
+        <Cockpit toggle={togglePersonsHandler} persons={personsState.persons} showState={showState} />
         {persons}
       </div>
   );

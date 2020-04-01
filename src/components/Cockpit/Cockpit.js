@@ -6,7 +6,7 @@ const Cockpit = (props) => {
     let textClasses = [];
     let btnClass = '';
 
-    if(props.showState) {
+    if(props.showPersons) {
         btnClass = classes.Red;
     }
 
@@ -17,6 +17,7 @@ const Cockpit = (props) => {
         textClasses.push(classes.bold);
     }
 
+    console.log("[Cockpit.js] rendering...");
     return (
         <div className={classes.Cockpit}>
             <h1>{props.title}</h1>

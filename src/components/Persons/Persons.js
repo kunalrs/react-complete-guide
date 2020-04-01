@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
-class Persons extends Component {
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("[Persons.js] shouldComponentUpdate ", nextProps, nextState);
-        return true;
-    }
+class Persons extends PureComponent {
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log("[Persons.js] getSnapshotBeforeUpdate ", prevProps, prevState);

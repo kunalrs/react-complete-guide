@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import aux from '../hoc/aux';
+import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/aux';
 
 class App extends Component {
 
@@ -77,25 +78,23 @@ class App extends Component {
     }
 
     return (
-        <aux>
-        <div className={classes.App}>
-          <button onClick={() => {
-              this.setState({
-                showCockpit: !this.state.showCockpit
-              })
-            }}>Show Cockpit</button>
-          {this.state.showCockpit ? <Cockpit 
-            title={this.props.appTitle} 
-            toggle={this.togglePersonsHandler} 
-            personsLength={this.state.persons.length} 
-            showPersons={this.state.showPersons} />
-          : null}
-          {persons}
-        </div>
-        <div>
-          <h1>Another component</h1>
-        </div>
-        </aux>
+        <Aux>
+          <WithClass classes={classes.App}>
+            <button onClick={() => {
+                this.setState({
+                  showCockpit: !this.state.showCockpit
+                })
+              }}>Show Cockpit</button>
+            {this.state.showCockpit ? <Cockpit 
+              title={this.props.appTitle} 
+              toggle={this.togglePersonsHandler} 
+              personsLength={this.state.persons.length} 
+              showPersons={this.state.showPersons} />
+            : null}
+            {persons}
+          </WithClass>
+          <div><h1>test</h1></div>
+        </Aux>
     );
   }
 }

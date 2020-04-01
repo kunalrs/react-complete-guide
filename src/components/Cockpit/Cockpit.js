@@ -13,13 +13,7 @@ const Cockpit = (props) => {
         };
     }, []);
 
-    useEffect(() => {
-        console.log("[Cockpit.js] useEffect will be called on every change in person");
-        // This will run after render is called, can be used for Cleanup
-        return () => {
-            console.log("[Cockpit.js cleanup after render...");
-        };
-    }, [props.persons]);
+    
 
     let textClasses = [];
     let btnClass = '';
@@ -28,10 +22,10 @@ const Cockpit = (props) => {
         btnClass = classes.Red;
     }
 
-    if(props.persons.length <= 2) {
+    if(props.personslength <= 2) {
         textClasses.push(classes.red);
     }
-    if (props.persons.length <= 1) {
+    if (props.personslength <= 1) {
         textClasses.push(classes.bold);
     }
 
@@ -48,4 +42,4 @@ const Cockpit = (props) => {
     );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);

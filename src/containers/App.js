@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import aux from '../hoc/aux';
 
 class App extends Component {
 
@@ -76,7 +77,7 @@ class App extends Component {
     }
 
     return (
-        <Fragment>
+        <aux>
         <div className={classes.App}>
           <button onClick={() => {
               this.setState({
@@ -94,7 +95,7 @@ class App extends Component {
         <div>
           <h1>Another component</h1>
         </div>
-        </Fragment>
+        </aux>
     );
   }
 }

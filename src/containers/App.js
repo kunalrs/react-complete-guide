@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
@@ -76,6 +76,7 @@ class App extends Component {
     }
 
     return (
+        <Fragment>
         <div className={classes.App}>
           <button onClick={() => {
               this.setState({
@@ -90,6 +91,10 @@ class App extends Component {
           : null}
           {persons}
         </div>
+        <div>
+          <h1>Another component</h1>
+        </div>
+        </Fragment>
     );
   }
 }

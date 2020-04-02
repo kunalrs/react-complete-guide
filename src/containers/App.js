@@ -13,9 +13,9 @@ class App extends Component {
     this.state = {
       showPersons: false,
       persons: [
-        { id: 'kunal1', name: "Kunal", age: "31" },
-        { id: 'karan1', name: "Karan", age: "29" },
-        { id: 'heer1', name: "Heer", age:"2" }
+        { id: 'kunal1', name: "Kunal", age: 31 },
+        { id: 'karan1', name: "Karan", age: 29 },
+        { id: 'heer1', name: "Heer", age: "2" }
       ],
       showCockpit: true
     };

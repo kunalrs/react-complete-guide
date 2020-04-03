@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from './Person.module.css';
 import PropTypes from 'prop-types';
-import aux from '../../../hoc/aux';
+import Aux from '../../../hoc/aux';
+import AuthContext from '../../../context/auth-context';
 
 class Person extends Component {
 
@@ -17,9 +18,12 @@ class Person extends Component {
     render() {
         console.log("[Person.js] rendering...");
         return (
-            <aux>
-                {this.props.isAuthenticated ? <p>Authenticated</p> : <p>Please Login!</p>}
+            <Aux>
                 <div className={classes.Person}>
+                    <AuthContext.Consumer>
+                        { context => context.authenticated ? <p>Authenticated</p> : <p>Please Login!</p> }
+                    </AuthContext.Consumer>
+                    
                     <p onClick={this.props.onClick}>
                         I am {this.props.name} & I am {this.props.age} years old
                     </p>
@@ -31,7 +35,7 @@ class Person extends Component {
                         onChange={(event) => this.props.changed(event)} 
                         value={this.props.name} />
                 </div>
-            </aux>
+            </Aux>
         );
     }
 }

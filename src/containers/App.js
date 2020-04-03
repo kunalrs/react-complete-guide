@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../hoc/WithClass';
 import Aux from '../hoc/aux';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
 
@@ -93,14 +94,16 @@ class App extends Component {
                   showCockpit: !this.state.showCockpit
                 })
               }}>Show Cockpit</button>
-            {this.state.showCockpit ? <Cockpit 
-              title={this.props.appTitle} 
-              toggle={this.togglePersonsHandler} 
-              login={this.loginHandler}
-              personsLength={this.state.persons.length} 
-              showPersons={this.state.showPersons} />
-            : null}
-            {persons}
+            <AuthContext.Provider value={ { authenticated: this.state.authenticated, login: this.loginHandler } }>
+              {this.state.showCockpit ? <Cockpit 
+                title={this.props.appTitle} 
+                toggle={this.togglePersonsHandler} 
+                login={this.loginHandler}
+                personsLength={this.state.persons.length} 
+                showPersons={this.state.showPersons} />
+              : null}
+              {persons}
+            </AuthContext.Provider>
           </WithClass>
           <div><h1>test</h1></div>
         </Aux>

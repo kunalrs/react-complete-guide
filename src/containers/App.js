@@ -17,7 +17,8 @@ class App extends Component {
         { id: 'karan1', name: "Karan", age: 29 },
         { id: 'heer1', name: "Heer", age: 2 }
       ],
-      showCockpit: true
+      showCockpit: true,
+      authenticated: false
     };
   }
 
@@ -62,13 +63,20 @@ class App extends Component {
     });
   }
 
+  loginHandler = () => {
+    this.setState({
+      authenticated: true
+    })
+  }
+
   render() {
     console.log("[App.js] rendering...");
     let persons = null;
 
     if(this.state.showPersons) {
       persons = (
-        <Persons 
+        <Persons
+          isAuthenticated={this.state.authenticated}
           persons={this.state.persons} 
           clicked={this.deletePersonHandler} 
           changed={this.nameChangeHandler} />
@@ -88,6 +96,7 @@ class App extends Component {
             {this.state.showCockpit ? <Cockpit 
               title={this.props.appTitle} 
               toggle={this.togglePersonsHandler} 
+              login={this.loginHandler}
               personsLength={this.state.persons.length} 
               showPersons={this.state.showPersons} />
             : null}

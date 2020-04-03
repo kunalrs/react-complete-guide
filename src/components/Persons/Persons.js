@@ -22,6 +22,7 @@ class Persons extends PureComponent {
         return this.props.persons.map( (person, index) => {
             return <ErrorBoundary key={person.id}>
                 <Person 
+                    isAuthenticated={this.props.isAuthenticated}
                     onClick={ () => this.props.clicked(index) }
                     changed = { (event) => this.props.changed(event, person.id) }
                     name={person.name}

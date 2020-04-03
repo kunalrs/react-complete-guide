@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 
 class Person extends Component {
 
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
+
     componentDidMount() {
-        this.inputEl.focus();
+        this.inputElementRef.current.focus();
     }
 
     render() {
@@ -19,9 +24,7 @@ class Person extends Component {
                 <p>{this.props.children}</p>
 
                 <input type="text" 
-                    ref={(inputEl) => {
-                        this.inputEl = inputEl;
-                    }}
+                    ref={this.inputElementRef}
                     onChange={(event) => this.props.changed(event)} 
                     value={this.props.name} />
             </div>

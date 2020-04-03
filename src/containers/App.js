@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
@@ -15,7 +15,7 @@ class App extends Component {
       persons: [
         { id: 'kunal1', name: "Kunal", age: 31 },
         { id: 'karan1', name: "Karan", age: 29 },
-        { id: 'heer1', name: "Heer", age: "2" }
+        { id: 'heer1', name: "Heer", age: 2 }
       ],
       showCockpit: true
     };

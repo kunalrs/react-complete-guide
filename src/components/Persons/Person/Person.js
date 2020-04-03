@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 
 class Person extends Component {
 
+    componentDidMount() {
+        this.inputEl.focus();
+    }
+
     render() {
         console.log("[Person.js] rendering...");
         return (
@@ -15,6 +19,9 @@ class Person extends Component {
                 <p>{this.props.children}</p>
 
                 <input type="text" 
+                    ref={(inputEl) => {
+                        this.inputEl = inputEl;
+                    }}
                     onChange={(event) => this.props.changed(event)} 
                     value={this.props.name} />
             </div>

@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
 
+    const toggleButtonRef = useRef(null);
+
+    
+
     useEffect(() => {
+        toggleButtonRef.current.click();
         console.log("[Cockpit.js] useEffect...");
         console.log("[Cockpit.js] this will run only once because additional array passed is []");
 
@@ -35,6 +40,7 @@ const Cockpit = (props) => {
             <h1>{props.title}</h1>
             <p className={textClasses.join(' ')}>Its working...</p>
             <button 
+                ref={toggleButtonRef}
                 className={btnClass} 
                 onClick={() => props.toggle()} >Toggle Persons
             </button>
